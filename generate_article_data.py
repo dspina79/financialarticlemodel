@@ -2,6 +2,7 @@ from gravityai import gravityai as grav
 import pickle
 import pandas as pd
 
+# define pickle elements
 model = pickle.load(open(''))
 tfidf_vectorize = pickle.load(open('')) # helo with weighted count of word count
 label_encoder = pickle.load(open(''))
@@ -15,5 +16,8 @@ def process(inpath, outpath):
     predictions = model.predict(features)
     # convert the output labels to categories
     input_data['category'] = label_encoder.inverse_transform(predictions)
+    # output file to the selected destination
     output_df = input_data[['id', 'category']]
     output_df.to_csv(outpath, index=False)
+
+grav.wait_for_requests(process)
